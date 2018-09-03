@@ -1,6 +1,16 @@
 <template>
   <section class="section-wrapper">
-    <!--<div v-for="(articles, index) in processedArticles" v-bind:key="index">-->
+
+    <div class="categories">
+      <a class="panel-item" ><span class="item fa fa-random"></span></a>
+      <a class="panel-item" v-on:click="getPosts('business')"><span class="item">Business</span></a>
+      <a class="panel-item" v-on:click="getPosts('entertainment')"><span class="item">Entertainment</span></a>
+      <a class="panel-item" v-on:click="getPosts('health')"><span class="item">Health</span></a>
+      <a class="panel-item" v-on:click="getPosts('science')"><span class="item">Science</span></a>
+      <a class="panel-item" v-on:click="getPosts('sports')"><span class="item">Sports</span></a>
+      <a class="panel-item" v-on:click="getPosts('technology')"><span class="item">Technology</span></a>
+    </div>
+    
     <transition-group class="grid-content">
       <div class="container" v-for="(article, index) in articles" v-bind:key="index">
         <a v-bind:href="article.url" target="_blank">
@@ -16,7 +26,7 @@
         </a>
       </div>
     </transition-group>
-    <!--</div>-->
+
   </section>
 </template>
 
@@ -32,14 +42,15 @@ function buildUrl(url) {
 export default {
   data() {
     return {
-      articles: []
+      articles: [],
+      section: 'business'
     }
   },
   mounted() {
-    this.getPosts('sports')
+    this.getPosts(this.section)
   },
   methods: {
-    getPosts(section) {
+    getPosts: function(section) {
       let url = buildUrl(section);
       axios.get(url)
         .then((response) => {
@@ -58,6 +69,41 @@ export default {
     position: relative;
     width: 100%;
     height: 100%;
+}
+.filter-categories {
+    margin: 10px 0px 10px 0px;
+}
+.panel-item {
+    display: inline-flex;
+    color: #A6A6A6;
+    text-align: center;
+    justify-content: center;
+    padding: 18px 20px;
+    text-decoration: none;
+    font-size: 20px;
+}
+.panel-item:hover {
+    color: #333;
+}
+.item {
+    position: relative;
+    cursor: pointer;
+}
+.item::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: bottom;
+    transition: transform 0.25s ease-out;
+}
+.item:hover::after {
+    background-color: #333;
+    transform: scaleX(1);
+    transform-origin: bottom center;
 }
 .grid-content {
     display: grid;
