@@ -1,30 +1,31 @@
 <template>
   <section class="section-wrapper">
 
-    <div class="categories">
-      <a class="panel-item" ><span class="item fa fa-random"></span></a>
-      <a class="panel-item" v-on:click="getPosts('business')"><span class="item">Business</span></a>
-      <a class="panel-item" v-on:click="getPosts('entertainment')"><span class="item">Entertainment</span></a>
-      <a class="panel-item" v-on:click="getPosts('health')"><span class="item">Health</span></a>
-      <a class="panel-item" v-on:click="getPosts('science')"><span class="item">Science</span></a>
-      <a class="panel-item" v-on:click="getPosts('sports')"><span class="item">Sports</span></a>
-      <a class="panel-item" v-on:click="getPosts('technology')"><span class="item">Technology</span></a>
+    <div class="panel-item">
+      <a><span class="item fa fa-random"></span></a>
+      <a v-on:click="getPosts('business')"><span class="item">Business</span></a>
+      <a v-on:click="getPosts('entertainment')"><span class="item">Entertainment</span></a>
+      <a v-on:click="getPosts('health')"><span class="item">Health</span></a>
+      <a v-on:click="getPosts('science')"><span class="item">Science</span></a>
+      <a v-on:click="getPosts('sports')"><span class="item">Sports</span></a>
+      <a v-on:click="getPosts('technology')"><span class="item">Technology</span></a>
     </div>
     
-    <transition-group class="grid-content">
-      <div class="container" v-for="(article, index) in articles" v-bind:key="index">
+    <transition-group class="grid-container">
+      <article class="content" v-for="(article, index) in articles" v-bind:key="index">
         <a v-bind:href="article.url" target="_blank">
-        <div class="card-image">
+          <div class="card-image">
           <figure class="image">
-            <img v-bind:src="article.urlToImage" v-bind:alt="article.title" width="300" height="200" />
+            <img v-bind:src="article.urlToImage ? article.urlToImage :'http://placehold.it/320x213?text=N/A'" 
+                v-bind:alt="article.title" width="320" height="213" />
             <figcaption>{{ article.title }}</figcaption>
           </figure>
-        </div>
-        <div class="card-content">
+          </div>
+          <div class="card-content">
           <!--<div class="content">{{ article.description }}</div>-->
-        </div>
+          </div>
         </a>
-      </div>
+      </article>
     </transition-group>
 
   </section>
@@ -36,9 +37,11 @@ import axios from 'axios'
 const BaseUrl = 'https://newsapi.org/v2/top-headlines?country=ph'
 const ApiKey = '643d0a34867c44cc9519671ec2e0dfbd'
 
+/* build the website url*/
 function buildUrl(url) {
   return BaseUrl + "&category=" + url + "&apiKey=" + ApiKey
 }
+
 export default {
   data() {
     return {
@@ -50,6 +53,7 @@ export default {
     this.getPosts(this.section)
   },
   methods: {
+    /* fetch news site api using axios*/
     getPosts: function(section) {
       let url = buildUrl(section);
       axios.get(url)
@@ -66,23 +70,22 @@ export default {
 
 <style>
 .section-wrapper {
-    position: relative;
     width: 100%;
     height: 100%;
 }
-.filter-categories {
+.panel-item {
+    position: relative;
+    text-align: center;
     margin: 10px 0px 10px 0px;
 }
-.panel-item {
+.panel-item > a {
     display: inline-flex;
     color: #A6A6A6;
-    text-align: center;
-    justify-content: center;
     padding: 18px 20px;
     text-decoration: none;
     font-size: 20px;
 }
-.panel-item:hover {
+.panel-item > a:hover {
     color: #333;
 }
 .item {
@@ -105,21 +108,20 @@ export default {
     transform: scaleX(1);
     transform-origin: bottom center;
 }
-.grid-content {
+
+.grid-container {
     display: grid;
-    grid-gap: 6px;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+    grid-gap: 2em;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 320px));
     grid-auto-rows: 1fr;
-    grid-auto-flow: dense;
+    justify-content: center;
 }
-.container {
+.content {
     position: relative;
-    box-sizing: border-box;
-    border: 1px solid #d3d3d3;
+    border: 2px solid #d3d3d3;
 }
 .card-content {
-    position: absolute;
-    width: 300px;
+    width: 320px;
 }
 </style>
 
