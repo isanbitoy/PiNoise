@@ -2,7 +2,7 @@
   <section class="section-wrapper">
 
     <div class="panel-item">
-      <a v-on:click="getShuffle()"><span class="item fa fa-random"></span></a>
+      <a v-on:click="getShuffle"><span class="item fa fa-random"></span></a>
       <a v-on:click="getPosts('business')"><span class="item">Business</span></a>
       <a v-on:click="getPosts('entertainment')"><span class="item">Entertainment</span></a>
       <a v-on:click="getPosts('health')"><span class="item">Health</span></a>
@@ -12,7 +12,7 @@
     </div>
     
     <transition-group name="grid-container" class="grid-container" tag="section">
-      <article class="content" v-for="(article, index) in articles" v-bind:key="index">
+      <div class="content" v-for="(article, index) in articles" v-bind:key="index">
         <a v-bind:href="article.url" target="_blank">
           <div class="card-image">
           <figure class="image">
@@ -25,7 +25,7 @@
           <!--<div class="content">{{ article.description }}</div>-->
           </div>
         </a>
-      </article>
+      </div>
     </transition-group>
 
   </section>
@@ -54,7 +54,7 @@ export default {
     this.getPosts(this.section)
   },
   methods: {
-    /* fetch news site api using axios*/
+    /*fetch news site api using axios*/
     getPosts: function(section) {
       let url = buildUrl(section);
       axios.get(url)
@@ -65,6 +65,7 @@ export default {
           console.log(error)
         });
     },
+    /*shuffle the articles using lodash*/
     getShuffle: function() {
       this.articles = _.shuffle(this.articles)
     }
@@ -130,10 +131,10 @@ export default {
 .content {
     position: relative;
     transition: all 0.8s ease;
-    border: 2px solid #d3d3d3;
 }
 .content > a {
     text-decoration: none;
+    cursor: pointer;
 }
 .card-content {
     width: 320px;
