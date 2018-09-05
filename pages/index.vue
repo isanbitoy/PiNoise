@@ -2,7 +2,7 @@
   <section class="section-wrapper">
 
     <div class="panel-item">
-      <a><span class="item fa fa-random"></span></a>
+      <a v-on:click="getShuffle()"><span class="item fa fa-random"></span></a>
       <a v-on:click="getPosts('business')"><span class="item">Business</span></a>
       <a v-on:click="getPosts('entertainment')"><span class="item">Entertainment</span></a>
       <a v-on:click="getPosts('health')"><span class="item">Health</span></a>
@@ -11,7 +11,7 @@
       <a v-on:click="getPosts('technology')"><span class="item">Technology</span></a>
     </div>
     
-    <transition-group class="grid-container">
+    <transition-group name="grid-container" class="grid-container" tag="section">
       <article class="content" v-for="(article, index) in articles" v-bind:key="index">
         <a v-bind:href="article.url" target="_blank">
           <div class="card-image">
@@ -33,6 +33,7 @@
 
 <script>
 import axios from 'axios'
+import _ from 'lodash'
 
 const BaseUrl = 'https://newsapi.org/v2/top-headlines?country=ph'
 const ApiKey = '643d0a34867c44cc9519671ec2e0dfbd'
@@ -63,6 +64,9 @@ export default {
         .catch(error => {
           console.log(error)
         });
+    },
+    getShuffle: function() {
+      this.articles = _.shuffle(this.articles)
     }
   }
 }
@@ -115,10 +119,21 @@ export default {
     grid-template-columns: repeat(auto-fit, minmax(320px, 320px));
     grid-auto-rows: 1fr;
     justify-content: center;
+    grid-auto-flow: dense;
+}
+.grid-container-enter-active, .grid-container-leave-active {
+    transition: all 1.0s ease;
+}
+.grid-container-enter, .grid-container-leave-to {
+    opacity: 0;
 }
 .content {
     position: relative;
+    transition: all 0.8s ease;
     border: 2px solid #d3d3d3;
+}
+.content > a {
+    text-decoration: none;
 }
 .card-content {
     width: 320px;
