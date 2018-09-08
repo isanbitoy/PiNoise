@@ -15,11 +15,11 @@
       <div class="content" v-for="(article, index) in articles" v-bind:key="index">
         <a v-bind:href="article.url" target="_blank">
           <div class="card-image">
-          <figure class="image">
-            <img v-bind:src="article.urlToImage ? article.urlToImage :'http://placehold.it/320x213?text=N/A'" 
+            <figure class="image">
+              <img v-bind:src="article.urlToImage ? article.urlToImage :'http://placehold.it/320x213?text=N/A'" 
                 v-bind:alt="article.title" width="320" height="213" />
-            <figcaption>{{ article.title }}</figcaption>
-          </figure>
+              <figcaption>{{ article.title }}</figcaption>
+            </figure>
           </div>
           <div class="card-content">
           <!--<div class="content">{{ article.description }}</div>-->
@@ -130,14 +130,17 @@ export default {
 }
 .content {
     position: relative;
+    width: 320px;
     transition: all 0.8s ease;
+    border-radius: 6px;
+    border: 2px solid #d3d3d3;
 }
 .content > a {
     text-decoration: none;
     cursor: pointer;
 }
-.card-content {
-    width: 320px;
+.image > figcaption {
+    margin-left: 10px;
 }
 </style>
 
