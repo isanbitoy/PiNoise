@@ -22,7 +22,7 @@
             </figure>
           </div>
           <div class="card-content">
-          <!--<div class="content">{{ article.description }}</div>-->
+            <div>{{ article.description }}</div>
           </div>
         </a>
       </div>
