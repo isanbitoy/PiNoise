@@ -2,7 +2,7 @@
   <section class="section-wrapper">
 
     <div class="panel-item">
-      <a v-on:click="getShuffle"><span class="item fa fa-random"></span></a>
+      <a v-on:click="getPosts('')"><span class="item">All</span></a>
       <a v-on:click="getPosts('business')"><span class="item">Business</span></a>
       <a v-on:click="getPosts('entertainment')"><span class="item">Entertainment</span></a>
       <a v-on:click="getPosts('health')"><span class="item">Health</span></a>
@@ -12,19 +12,19 @@
     </div>
     
     <transition-group name="grid-container" class="grid-container" tag="section">
-      <div class="content" v-for="(article, index) in articles" v-bind:key="index">
-        <a v-bind:href="article.url" target="_blank">
-          <div class="card-image">
-            <figure class="image">
-              <img v-bind:src="article.urlToImage ? article.urlToImage :'http://placehold.it/320x213?text=N/A'" 
-                v-bind:alt="article.title" width="320" height="213" />
-              <figcaption>{{ article.title }}</figcaption>
-            </figure>
-          </div>
-          <div class="card-content">
-            <div>{{ article.description }}</div>
-          </div>
+      <div class="content-container" v-for="(article, index) in articles" v-bind:key="index">
+
+        <a v-bind:title="article.title" v-bind:href="article.url" target="_blank">
+          <figure class="figure-image">
+            <img v-bind:src="article.urlToImage ? article.urlToImage : placeholder" 
+                v-bind:alt="article.title" />
+            <figcaption>
+              <h4>{{ article.title }}</h4>
+              <div>source:&nbsp;<span>{{ article.source.name }}</span></div>
+            </figcaption>
+          </figure>
         </a>
+
       </div>
     </transition-group>
 
@@ -47,7 +47,8 @@ export default {
   data() {
     return {
       articles: [],
-      section: 'business'
+      section: '',
+      placeholder: 'http://placehold.it/320x213?text=N/A'
     }
   },
   mounted() {
@@ -64,10 +65,6 @@ export default {
         .catch(error => {
           console.log(error)
         });
-    },
-    /*shuffle the articles using lodash*/
-    getShuffle: function() {
-      this.articles = _.shuffle(this.articles)
     }
   }
 }
@@ -83,14 +80,14 @@ export default {
     text-align: center;
     margin: 10px 0px 10px 0px;
 }
-.panel-item > a {
+.panel-item a {
     display: inline-flex;
     color: #A6A6A6;
     padding: 18px 20px;
     text-decoration: none;
     font-size: 20px;
 }
-.panel-item > a:hover {
+.panel-item a:hover {
     color: #333;
 }
 .item {
@@ -117,8 +114,8 @@ export default {
 .grid-container {
     display: grid;
     grid-gap: 2em;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 320px));
-    grid-auto-rows: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 320px));
+    grid-auto-rows: repeat(auto-fit, minmax(auto, 1fr));
     justify-content: center;
     grid-auto-flow: dense;
 }
@@ -128,19 +125,31 @@ export default {
 .grid-container-enter, .grid-container-leave-to {
     opacity: 0;
 }
-.content {
-    position: relative;
-    width: 320px;
+.content-container {
     transition: all 0.8s ease;
-    border-radius: 6px;
-    border: 2px solid #d3d3d3;
+    border-radius: 2px;
+    border: 2px dashed #d3d3d3;
+    width: 320px;
 }
-.content > a {
+.content-container a {
     text-decoration: none;
     cursor: pointer;
 }
-.image > figcaption {
-    margin-left: 10px;
+.figure-image img {
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    max-height: auto;
+}
+.figure-image figcaption {
+    top: 0;
+    left: 0;
+    color: #444;
+    background: #fff;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 5px;
+    font-size: 14px;
+    line-height: 20px;
 }
 </style>
 
