@@ -14,6 +14,11 @@
     <transition-group name="grid-container" class="grid-container" tag="section">
       <div class="content-container" v-for="(article, index) in articles" v-bind:key="index">
 
+      <content-loader v-if="!article.url"
+          :speed="2"
+          :animate="true"
+      ></content-loader>
+      <div v-else>
         <a v-bind:title="article.title" v-bind:href="article.url" target="_blank">
           <figure class="figure-image">
             <img v-bind:src="article.urlToImage ? article.urlToImage : placeholder" 
@@ -24,6 +29,7 @@
             </figcaption>
           </figure>
         </a>
+      </div>
 
       </div>
     </transition-group>
@@ -34,6 +40,7 @@
 <script>
 import axios from 'axios'
 import _ from 'lodash'
+import { ContentLoader } from 'vue-content-loader'
 
 const BaseUrl = 'https://newsapi.org/v2/top-headlines?country=ph'
 const ApiKey = '643d0a34867c44cc9519671ec2e0dfbd'
@@ -44,6 +51,9 @@ function buildUrl(url) {
 }
 
 export default {
+  components: {
+    ContentLoader
+  },
   data() {
     return {
       articles: [],
@@ -52,7 +62,9 @@ export default {
     }
   },
   mounted() {
-    this.getPosts(this.section)
+    setTimeout(() => {
+      this.getPosts(this.section)
+    }, 200);
   },
   methods: {
     /*fetch news site api using axios*/
@@ -60,10 +72,10 @@ export default {
       let url = buildUrl(section);
       axios.get(url)
         .then((response) => {
-          this.articles = response.data.articles
+          this.articles = response.data.articles;
         })
         .catch(error => {
-          console.log(error)
+          console.log(error);
         });
     }
   }
@@ -90,6 +102,10 @@ export default {
 .panel-item a:hover {
     color: #333;
 }
+.panel-item a:active {
+    color: #019fc2;
+    cursor: default;
+}
 .item {
     position: relative;
     cursor: pointer;
@@ -110,7 +126,11 @@ export default {
     transform: scaleX(1);
     transform-origin: bottom center;
 }
-
+.item.active {
+    background-color: #eee;
+    border-radius: 6px;
+    padding: 0 5px;
+}
 .grid-container {
     display: grid;
     grid-gap: 2em;
