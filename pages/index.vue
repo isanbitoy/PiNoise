@@ -14,7 +14,7 @@
     <transition-group name="grid-container" class="grid-container" tag="section">
       <div class="content-container" v-for="(article, index) in articles" v-bind:key="index">
 
-      <content-loader v-if="!article.url"
+      <content-loader v-if="!article.title"
           :speed="2"
           :animate="true"
       ></content-loader>
@@ -90,21 +90,17 @@ export default {
 .panel-item {
     position: relative;
     text-align: center;
-    margin: 10px 0px 10px 0px;
+    margin: 25px 0px 20px 0px;
 }
 .panel-item a {
     display: inline-flex;
-    color: #A6A6A6;
+    color: #a6a6a6;
     padding: 18px 20px;
     text-decoration: none;
     font-size: 20px;
 }
 .panel-item a:hover {
     color: #333;
-}
-.panel-item a:active {
-    color: #019fc2;
-    cursor: default;
 }
 .item {
     position: relative;
@@ -126,10 +122,10 @@ export default {
     transform: scaleX(1);
     transform-origin: bottom center;
 }
-.item.active {
+.item:active {
     background-color: #eee;
-    border-radius: 6px;
-    padding: 0 5px;
+    color: #019fc2;
+    cursor: default;
 }
 .grid-container {
     display: grid;
@@ -146,10 +142,11 @@ export default {
     opacity: 0;
 }
 .content-container {
+    width: 320px;
+    background-color: #fff;
     transition: all 0.8s ease;
     border-radius: 2px;
-    border: 2px dashed #d3d3d3;
-    width: 320px;
+    border: 1px dashed #ededed;
 }
 .content-container a {
     text-decoration: none;
