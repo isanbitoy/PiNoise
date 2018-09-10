@@ -12,7 +12,7 @@
     </div>
     
     <transition-group name="grid-container" class="grid-container" tag="section">
-      <div class="content-container" v-for="(article, index) in articles" v-bind:key="index">
+      <article class="article-container" v-for="(article, index) in articles" v-bind:key="index">
 
       <content-loader v-if="!article.title"
           :speed="2"
@@ -31,7 +31,7 @@
         </a>
       </div>
 
-      </div>
+      </article>
     </transition-group>
 
   </section>
@@ -141,14 +141,14 @@ export default {
 .grid-container-enter, .grid-container-leave-to {
     opacity: 0;
 }
-.content-container {
+.article-container {
     width: 320px;
     background-color: #fff;
     transition: all 0.8s ease;
     border-radius: 2px;
-    border: 1px dashed #ededed;
+    border: 1px solid #ededed;
 }
-.content-container a {
+.article-container a {
     text-decoration: none;
     cursor: pointer;
 }
