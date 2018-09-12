@@ -10,19 +10,11 @@
       <a v-on:click="getPosts('sports')"><span class="item">Sports</span></a>
       <a v-on:click="getPosts('technology')"><span class="item">Technology</span></a>
     </div>
+    <div class="big"><MainHeadline/></div>
     
-    <transition-group name="grid-container" class="grid-container" tag="section">
+    <transition-group name="grid-container" class="grid-container" tag="div">
 
-      <div class="big">
-        
-      </div>
-      <div class="vertical">
-        
-      </div>
-      <div class="med">
-        
-      </div>
-
+      <!--
       <article class="article-container" v-for="(article, index) in articles" v-bind:key="index">
         <a v-bind:title="article.title" v-bind:href="article.url" target="_blank">
           <figure class="figure-image">
@@ -35,6 +27,7 @@
           </figure>
         </a>
       </article>
+      -->
 
     </transition-group>
 
@@ -44,7 +37,7 @@
 <script>
 import axios from 'axios'
 import _ from 'lodash'
-import { ContentLoader } from 'vue-content-loader'
+import MainHeadline from '~/components/MainHeadline.vue'
 
 const BaseUrl = 'https://newsapi.org/v2/top-headlines?country=ph'
 const ApiKey = '643d0a34867c44cc9519671ec2e0dfbd'
@@ -56,7 +49,7 @@ function buildUrl(url) {
 
 export default {
   components: {
-    ContentLoader
+    MainHeadline
   },
   data() {
     return {
