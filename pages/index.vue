@@ -1,5 +1,5 @@
 <template>
-  <section class="section-wrapper">
+  <main class="section-wrapper">
 
     <div class="panel-item">
       <a v-on:click="getPosts('')"><span class="item">All</span></a>
@@ -12,13 +12,18 @@
     </div>
     
     <transition-group name="grid-container" class="grid-container" tag="section">
-      <article class="article-container" v-for="(article, index) in articles" v-bind:key="index">
 
-      <content-loader v-if="!article.title"
-          :speed="2"
-          :animate="true"
-      ></content-loader>
-      <div v-else>
+      <div class="big">
+        
+      </div>
+      <div class="vertical">
+        
+      </div>
+      <div class="med">
+        
+      </div>
+
+      <article class="article-container" v-for="(article, index) in articles" v-bind:key="index">
         <a v-bind:title="article.title" v-bind:href="article.url" target="_blank">
           <figure class="figure-image">
             <img v-bind:src="article.urlToImage ? article.urlToImage : placeholder" 
@@ -29,12 +34,11 @@
             </figcaption>
           </figure>
         </a>
-      </div>
-
       </article>
+
     </transition-group>
 
-  </section>
+  </main>
 </template>
 
 <script>
@@ -82,6 +86,23 @@ export default {
 }
 </script>
 
+<style scoped>
+.grid-container {
+    display: grid;
+    grid-gap: 2em;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 320px));
+    grid-auto-rows: repeat(auto-fit, minmax(auto, 1fr));
+    justify-content: center;
+    grid-auto-flow: dense;
+}
+.big {
+    grid-column: span 2;
+}
+</style>
+
+
+
+<!--
 <style>
 .section-wrapper {
     width: 100%;
@@ -169,4 +190,5 @@ export default {
     line-height: 20px;
 }
 </style>
+-->
 
