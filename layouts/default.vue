@@ -9,6 +9,15 @@
   </div>
 </template>
 
+<script>
+import MainHeadline from '~/components/MainHeadline.vue'
+export default {
+    components: {
+        MainHeadline
+    }
+}
+</script>
+
 <style>
 html {
     font-family: Raleway, sans-serif;
@@ -18,7 +27,8 @@ html {
     -webkit-text-size-adjust: 100%;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    margin: 2.5em 12%;
+    margin: 2.5em 10%;
+    background-color: #f6f6f6;
 }
 
 *, *:before, *:after {
@@ -26,11 +36,19 @@ html {
     padding: 0;
     margin: 0;
 }
-h1, h3 {
+h1, h2, h3 {
     color: #80ced6;
+}
+[v-cloak] {
+    display: none;
 }
 .header-content {
     margin: 10px 0;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    background-color: #fff;
 }
 .div-line {
     position: relative;
@@ -38,7 +56,7 @@ h1, h3 {
 .div-line::after {
     position: absolute;
     content: '';
-    background: #d3d3d3;
+    background-color: #80ced6;
     bottom: 0;
     left: 0;
     height: 3px;
