@@ -7,15 +7,19 @@ module.exports = {
     '@nuxtjs/dotenv'
   ],
   head: {
-    title: 'Philippines News Portal',
+    title: 'PH News Portal',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Nuxt.js project' }
     ],
+    script: [
+      { src: 'https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js' }
+    ], 
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' }
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' },
+      { rel: 'stylesheet', href: 'https://unpkg.com/flickity@2/dist/flickity.min.css' }
     ]
   },
   /*
