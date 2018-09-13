@@ -88,9 +88,6 @@ export default {
     justify-content: center;
     grid-auto-flow: dense;
 }
-.big {
-    grid-column: span 2;
-}
 </style>
 
 
