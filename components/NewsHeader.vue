@@ -1,0 +1,3 @@
+<template>
+	<ph-flag/>
+</template>

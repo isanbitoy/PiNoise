@@ -1,27 +1,23 @@
 {
-  "name": "vue-ph-news",
+  "name": "nuxt-ph-news",
   "version": "1.0.0",
-  "description": "Nuxt.js project",
-  "author": "",
+  "description": "My dandy Nuxt.js project",
+  "author": "isan",
   "private": true,
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "precommit": "npm run lint"
+    "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.3.1",
-    "@nuxtjs/dotenv": "^1.1.1",
-    "nuxt": "^1.0.0"
+    "cross-env": "^5.2.0",
+    "nuxt": "^2.0.0",
+    "@nuxtjs/axios": "^5.0.0"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.1",
-    "eslint": "^4.15.0",
-    "eslint-friendly-formatter": "^3.0.0",
-    "eslint-loader": "^1.7.1",
-    "eslint-plugin-vue": "^4.0.0"
+    "node-sass": "^4.10.0",
+    "nodemon": "^1.11.0",
+    "sass-loader": "^7.1.0"
   }
 }
