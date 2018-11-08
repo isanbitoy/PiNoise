@@ -1,4 +1,4 @@
 import Vue from 'vue'
-import VueFLickity from 'vue-flickity'
+import Flickity from 'vue-flickity'
 
-Vue.use(VueFLickity)
+Vue.component('flickity', Flickity)
