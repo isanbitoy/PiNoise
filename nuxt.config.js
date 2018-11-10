@@ -1,4 +1,9 @@
 const pkg = require('./package')
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+  router: {
+    base: '/nuxt-ph-news/'
+  }
+} : {}
 
 module.exports = {
   mode: 'universal',
@@ -23,6 +28,8 @@ module.exports = {
   */
   loading: { color: '#fff' },
 
+  ...routerBase,
+
   /*
   ** Global CSS
   */
@@ -34,8 +41,9 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/global-component',
-    '~/plugins/vue-moment'
+    { src: '~/plugins/global-component' },
+    { src: '~/plugins/vue-moment' },
+    { src: '~/plugins/vue-flickity', ssr: false }
   ],
 
   /*
