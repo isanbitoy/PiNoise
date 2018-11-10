@@ -1,0 +1,27 @@
+{
+  "name": "nuxt-ph-news",
+  "version": "1.0.0",
+  "description": "My dandy Nuxt.js project",
+  "author": "isan",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "build:gh-pages": "cross-env DEPLOY_ENV=GH_PAGES nuxt build",
+    "generate:gh-pages": "cross-env DEPLOY_ENV=GH_PAGES nuxt generate",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^2.0.0",
+    "@nuxtjs/axios": "^5.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "node-sass": "^4.10.0",
+    "nodemon": "^1.11.0",
+    "sass-loader": "^7.1.0",
+    "vue-flickity": "^1.1.2",
+    "vue-moment": "^4.0.0"
+  }
+}
